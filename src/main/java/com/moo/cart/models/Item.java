@@ -19,6 +19,10 @@ public class Item {
     private Product product;
     private int quantity;
 
+    public void updateQuantity(int quantity){
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

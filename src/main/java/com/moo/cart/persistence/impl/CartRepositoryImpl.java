@@ -28,6 +28,7 @@ public class CartRepositoryImpl implements CartRepository {
         return Optional.ofNullable(cartMap.putIfAbsent(id, item) == null ? user : null);
     }
 
+
     @Override
     public Optional<User> replaceUser(String key, User user) {
         return Optional.ofNullable(userList.replace(key, user) != null ? user : null);
