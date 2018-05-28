@@ -5,7 +5,7 @@ import com.moo.cart.models.Item;
 import java.util.Optional;
 
 public interface CartRepository {
-    Optional<Cart> getItem(String id);
+    Optional<Cart> getCart(String id);
     Optional<Cart> addItem(String id, Item item);
-    boolean clearCart(String key);
+    boolean clearItem(String id);
 }

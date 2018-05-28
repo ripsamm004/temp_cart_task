@@ -1,7 +1,9 @@
-package service;
+package com.moo.cart.service;
 
 
 import com.moo.cart.models.Product;
+
+import java.util.Optional;
 
 /**
  * Service to identify the product
@@ -9,7 +11,7 @@ import com.moo.cart.models.Product;
  * @author gamesys
  */
 public interface ProductService {
-    Product getProduct(String ssn);
+    Optional<Product> getProduct(String code);
 }
 
 

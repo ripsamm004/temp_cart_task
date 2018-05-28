@@ -3,6 +3,7 @@ package com.moo.cart.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -12,23 +13,24 @@ import java.util.List;
 @RequiredArgsConstructor // create Constructor for id not for items
 @Getter
 public class Cart {
+    @NonNull
     private String id;
     private final List<Item> items = new ArrayList<Item>();
 
-    public void addItem(Product product, int quantity) {
-        Item item = this.findItemByProductCode(product.getCode());
+    public void addItem(Item item) {
+        Item itemByProductCode = this.findItemByProductCode(item.getProduct().getCode());
 
-        if (item == null) {
-            item = new Item(product, 0);
-            this.items.add(item);
+        if (itemByProductCode == null) {
+            itemByProductCode = new Item(item.getProduct(), 0);
+            this.items.add(itemByProductCode);
         }
 
-        int newQuantity = item.getQuantity() + quantity;
+        int newQuantity = itemByProductCode.getQuantity() + item.getQuantity();
 
         if (newQuantity <= 0) {
-            this.items.remove(item);
+            this.items.remove(itemByProductCode);
         } else {
-            item.updateQuantity(newQuantity);
+            itemByProductCode.updateQuantity(newQuantity);
         }
     }
 
