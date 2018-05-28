@@ -3,7 +3,6 @@ package com.moo.cart.persistence.impl;
 import com.moo.cart.models.Cart;
 import com.moo.cart.models.Item;
 import com.moo.cart.persistence.CartRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,13 +10,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 @Repository("cartRepository")
 public class CartRepositoryImpl implements CartRepository {
 
     private static final Map<String, Cart> cartMap = new ConcurrentHashMap<>();
 
-    @Autowired
-    public void CartRepositoryImpl(){
+    CartRepositoryImpl(){
         //Initialize Data
         Cart car1 = new Cart("1");
         Cart car2 = new Cart("2");

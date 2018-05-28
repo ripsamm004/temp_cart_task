@@ -17,8 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     private static final Map<String, Product> productMap = new HashMap<>();
 
-    @Autowired
-    public void ProductServiceImpl(){
+    ProductServiceImpl(){
         productMap.put("ABCD", new Product("ABCD", "Product-ABCD", 1.50d));
         productMap.put("UXYZ", new Product("UXYZ", "Product-UXYZ", 5.50d));
         productMap.put("LTDN", new Product("LTDN", "Product-LTDN", 3.00d));

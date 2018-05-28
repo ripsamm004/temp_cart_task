@@ -6,7 +6,6 @@ import com.moo.cart.api.exception.NotFoundException;
 import com.moo.cart.models.Cart;
 import com.moo.cart.models.Item;
 import com.moo.cart.persistence.CartRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -14,9 +13,9 @@ import java.util.List;
 
 
 /**
- * This service is offer User data manipulation task.
+ * This service is offer Cart data manipulation task.
  */
-@Slf4j
+
 @Service
 public class CartService
 {
