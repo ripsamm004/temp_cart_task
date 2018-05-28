@@ -25,18 +25,18 @@ public class CartService
     protected CartRepository cartRepository;
 
     public List<Item> getAllItem(String id) {
-        Cart cart = cartRepository.getCart(id).orElseThrow(() -> new NotFoundException("Cart not found", ErrorEnum.API_ERROR_CART_NOT_FOUND));
+        Cart cart = cartRepository.getCart(id).orElseThrow(() -> new NotFoundException("CART NOT FOUND", ErrorEnum.API_ERROR_CART_NOT_FOUND));
         return cart.getItems();
     }
 
     public List<Item> addItem(String id, Item item) {
-        Cart cart = cartRepository.addItem(id, item).orElseThrow(() -> new NotFoundException("Cart not found", ErrorEnum.API_ERROR_CART_NOT_FOUND));
+        Cart cart = cartRepository.addItem(id, item).orElseThrow(() -> new NotFoundException("CART NOT FOUND", ErrorEnum.API_ERROR_CART_NOT_FOUND));
         return cart.getItems();
     }
 
     public void clearItem(String id) {
         if (!cartRepository.clearItem(id)) {
-            throw new NotFoundException("Cart not found", ErrorEnum.API_ERROR_CART_NOT_FOUND);
+            throw new NotFoundException("CART NOT FOUND", ErrorEnum.API_ERROR_CART_NOT_FOUND);
         }
     }
 
