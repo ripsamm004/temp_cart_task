@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 /**
  *  This class represent the Item in the cart. A item in a cart can have
  *  product (identify by a product code)

@@ -1,9 +1,7 @@
 package com.moo.cart.api;
 
 import com.moo.cart.models.Item;
-import com.moo.cart.models.Product;
 import com.moo.cart.service.CartService;
-import com.moo.cart.service.ProductService;
 import com.moo.cart.service.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
