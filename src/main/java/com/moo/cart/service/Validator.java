@@ -32,7 +32,7 @@ public class Validator
          || StringUtils.isEmpty(itemDTO.getQuantity())
         ) throw new BadRequestException("DATA INVALID", ErrorEnum.API_ERROR_INVALID_REQUEST_BODY);
 
-        if(!validateProductCode(itemDTO.getCode())) throw new BadRequestException("PRODUCT CODE", ErrorEnum.API_ERROR_PRODUCT_CODE_NOT_CORRECT);
+        if(!validateProductCode(itemDTO.getCode())) throw new BadRequestException("INVALID PRODUCT CODE", ErrorEnum.API_ERROR_PRODUCT_CODE_NOT_CORRECT);
 
         return dtoToItem(itemDTO);
     }
