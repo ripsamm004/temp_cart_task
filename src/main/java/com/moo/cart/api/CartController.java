@@ -37,9 +37,10 @@ public class CartController {
     }
 
     @DeleteMapping("/{id}")
-    public void clearItem(@PathVariable String id) {
+    public ResponseEntity<Object> clearItem(@PathVariable String id) {
         log.info("DELETE : Clear CART Item");
         cartService.clearItem(id);
+        return new ResponseEntity(null, HttpStatus.OK);
     }
 
 }
