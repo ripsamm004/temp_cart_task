@@ -181,6 +181,33 @@ public class CartControllerUTest {
         verify(cartService, times(0)).addItem(cart.getId(), item0);
     }
 
+
+    @Test
+    public void testIfCartExistWhenRequestBodyInValidThenResponseJsonError() throws Exception {
+
+        String requestBodyPayLoad = "";
+        Cart cart = new Cart("1");
+        Product p0 = new Product("ABCD", "Product-ABCD", 1.50d);
+        Item item0 = new Item(p0, 10);
+
+        ItemDTO itemDTO = new ItemDTO("INVALID_CODE", 10);
+
+
+        when(validator.validateItemDto(any(ItemDTO.class))).thenReturn(item0);
+        doReturn(null).when(cartService).addItem(any(String.class), any(Item.class));
+
+        mvc.perform(put(apiEndPoint + "/" + cart.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBodyPayLoad))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.code", is(ErrorEnum.API_ERROR_REQUEST_BODY_FORMAT_INVALID.getCode())))
+                .andReturn();
+
+        verify(validator, times(0)).validateItemDto(any(ItemDTO.class));
+        verify(cartService, times(0)).addItem(cart.getId(), item0);
+    }
+
     @Test
     public void testIfCartNotExistWhenAddItemRequestThenResponseJsonError() throws Exception {
 

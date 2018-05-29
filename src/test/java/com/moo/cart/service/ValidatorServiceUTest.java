@@ -35,7 +35,6 @@ public class ValidatorServiceUTest {
     @InjectMocks
     private Validator validator;
 
-
     @Test
     public void testIfCartItemProductCodeIsValidThenExpectTrue() {
         Product p0 = new Product("ABCD", "Product-ABCD", 1.50d);

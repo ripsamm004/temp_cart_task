@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@RequiredArgsConstructor // create Constructor with id not with items
+@RequiredArgsConstructor // create Constructor with parameter id
 @Getter
 public class Cart {
     @NonNull
