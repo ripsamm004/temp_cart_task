@@ -83,7 +83,7 @@ public class CartServiceUTest {
         List<Item> itemListExpected = cartService.addItem(cart.getId(), item0);
         verify(cartRepository, times(1)).addItem(cart.getId(), item0);
 
-        assertThat(itemListExpected.size(), Matchers.is(2));
+        assertThat(itemListExpected.size(), Matchers.is(1));
         assertEquals(itemListExpected.get(0), item0);
         assertEquals(itemListExpected.get(0).getProduct(), p0);
     }

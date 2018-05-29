@@ -2,30 +2,21 @@ package com.moo.cart.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moo.cart.ApplicationMain;
-import com.moo.cart.api.exception.NotFoundException;
 import com.moo.cart.models.Cart;
-import com.moo.cart.models.Item;
-import com.moo.cart.models.Product;
 import com.moo.cart.service.CartService;
 import com.moo.cart.service.Validator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -98,7 +89,7 @@ public class CartControllerITest {
 
     @Test
     public void testIfGivenCartIdWhenCartIsValidAndAddItemWithValidProductThenResponseJsonArrayOfCartItems() throws Exception {
-        String cartId = "1";
+        String cartId = "2";
         ItemDTO itemDTO = new ItemDTO("ABCD", 10);
         mvc.perform(put(apiEndPoint + "/" + cartId)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -113,7 +104,7 @@ public class CartControllerITest {
 
     @Test
     public void testIfGivenCartIdWhenCartIsValidAndAddItemWithInValidProductThenResponseJsonError() throws Exception {
-        String cartId = "1";
+        String cartId = "3";
         ItemDTO itemDTO = new ItemDTO("INVALID_PRODUCT_CODE", 10);
         mvc.perform(put(apiEndPoint + "/" + cartId)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -165,7 +156,7 @@ public class CartControllerITest {
     @Test
     public void testIfCartHasItemsWhenClearCartRequestThenResponseOK() throws Exception {
 
-        String cartId = "1";
+        String cartId = "3";
         ItemDTO itemDTO = new ItemDTO("ABCD", 10);
         mvc.perform(put(apiEndPoint + "/" + cartId)
                 .contentType(MediaType.APPLICATION_JSON)

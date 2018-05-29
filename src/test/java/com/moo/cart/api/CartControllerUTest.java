@@ -3,7 +3,9 @@ package com.moo.cart.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moo.cart.ApplicationMain;
 import com.moo.cart.api.exception.BadRequestException;
+import com.moo.cart.api.exception.ForbiddenException;
 import com.moo.cart.api.exception.NotFoundException;
+import com.moo.cart.api.exception.ServerException;
 import com.moo.cart.models.Cart;
 import com.moo.cart.models.Item;
 import com.moo.cart.models.Product;
@@ -232,6 +234,58 @@ public class CartControllerUTest {
         verify(validator, times(1)).validateItemDto(any(ItemDTO.class));
         verify(cartService, times(1)).addItem(cart.getId(), item0);
     }
+
+
+    @Test
+    public void testIfCartNotExistWhenForbiddenExceptionThenResponseJsonError() throws Exception {
+
+        ItemDTO itemDTO = new ItemDTO("ABCD", 10);
+        Cart cart = new Cart("1");
+        Product p0 = new Product("ABCD", "Product-ABCD", 1.50d);
+        Item item0 = new Item(p0, 10);
+
+        when(validator.validateItemDto(any(ItemDTO.class))).thenReturn(item0);
+
+        doThrow(new ForbiddenException("TEST FORBIDDEN", ErrorEnum.FORBIDDEN_EXCEPTION))
+                .when(cartService).addItem(cart.getId(), item0);
+
+        mvc.perform(put(apiEndPoint + "/" + cart.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(itemDTO)))
+                .andExpect(status().isForbidden())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.code", is(ErrorEnum.FORBIDDEN_EXCEPTION.getCode())))
+                .andReturn();
+
+        verify(validator, times(1)).validateItemDto(any(ItemDTO.class));
+        verify(cartService, times(1)).addItem(cart.getId(), item0);
+    }
+
+    @Test
+    public void testIfCartNotExistWhenServerExceptionThenResponseJsonError() throws Exception {
+
+        ItemDTO itemDTO = new ItemDTO("ABCD", 10);
+        Cart cart = new Cart("1");
+        Product p0 = new Product("ABCD", "Product-ABCD", 1.50d);
+        Item item0 = new Item(p0, 10);
+
+        when(validator.validateItemDto(any(ItemDTO.class))).thenReturn(item0);
+
+        doThrow(new ServerException("SERVER EXCEPTION TEST", ErrorEnum.SERVER_EXCEPTION))
+                .when(cartService).addItem(cart.getId(), item0);
+
+        mvc.perform(put(apiEndPoint + "/" + cart.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(itemDTO)))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.code", is(ErrorEnum.SERVER_EXCEPTION.getCode())))
+                .andReturn();
+
+        verify(validator, times(1)).validateItemDto(any(ItemDTO.class));
+        verify(cartService, times(1)).addItem(cart.getId(), item0);
+    }
+
 
     @Test
     public void testIfCartNotExistWhenClearCartRequestThenResponseJsonError() throws Exception {
