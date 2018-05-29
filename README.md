@@ -33,6 +33,9 @@
 
 # Shopping cart service endpoint : /cart
 
+```
+Valid cart id can be use for this api [1, 2, 3]
+```
 
 * Add item in to shopping cart
 
