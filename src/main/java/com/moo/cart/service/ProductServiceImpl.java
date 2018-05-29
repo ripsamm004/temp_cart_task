@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * This is stub , if any code send to the api will return product details
+ * This is stub , if product identifier (code) send in the request body of the api call this service
+ * will return product details from the product identifier
  */
 
 @Service
